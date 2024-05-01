@@ -2,6 +2,8 @@
 
 Quickly move all guests to a selected footpath.
 
+![Guest Teleporter](/images/guest-teleporter.gif)
+
 ## Usage
 
 1. Select the tile you want to send guests to.
