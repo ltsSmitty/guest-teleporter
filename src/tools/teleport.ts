@@ -6,6 +6,7 @@ const teleportAll = (coords: CoordsXYZ) => {
   };
   const guests = map.getAllEntities("guest");
   guests.forEach((guest) => {
+    if (!guest.isInPark) return;
     // pick up
     context.executeAction(
       "peeppickup",
@@ -20,7 +21,7 @@ const teleportAll = (coords: CoordsXYZ) => {
       },
       (res) => {
         if (res.error) {
-          // console.log(`Guest ${guest.id} not able to be picked up; likely on ride`, res);
+          console.log(`Guest ${guest.id} not able to be picked up; likely on ride`, res);
           return;
         }
         // set down
