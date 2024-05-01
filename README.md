@@ -2,7 +2,7 @@
 
 Quickly move all guests to a selected footpath.
 
-![Guest Teleporter](/images/guest-teleporter.gif)
+![Guest Teleporter](/images/demo.gif)
 
 ## Usage
 
