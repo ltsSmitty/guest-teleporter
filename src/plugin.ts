@@ -4,7 +4,7 @@ import { startup } from "./startup";
 
 registerPlugin({
   name: "Guest Teleporter",
-  version: "1.0",
+  version: "1.1",
   authors: ["ltsSmitty"],
   type: "remote",
   licence: "MIT",

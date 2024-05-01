@@ -66,11 +66,6 @@ export function initialize() {
             }),
             onClick: () => {
               if (!coordsStore.get() || selectedZIndexStore.get() === null) return;
-              console.log(
-                `x,y,z: ${coordsStore.get()!.x},${coordsStore.get()!.y},${
-                  zOptionsStore.get()[selectedZIndexStore.get()!]
-                }`
-              );
               teleportAll({
                 x: coordsStore.get()!.x,
                 y: coordsStore.get()!.y,
@@ -83,9 +78,7 @@ export function initialize() {
           text: compute(coordsStore, selectedZIndexStore, (coords, selectedZIndex) => {
             if (!coords) return "{RED}Select a tile";
             if (selectedZIndex === null) return "{RED}Select a path z height";
-            return `Selected destination: (${coords.x / 32}, ${coords.y / 32}, ${
-              zOptionsStore.get()[selectedZIndex]
-            })`;
+            return `Selected destination: (${coords.x / 32}, ${coords.y / 32}, ${zOptionsStore.get()[selectedZIndex]})`;
           }),
         }),
       ]),
