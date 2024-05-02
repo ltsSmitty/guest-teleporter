@@ -4,6 +4,8 @@ import typescript from "@rollup/plugin-typescript";
 import { exec } from "child_process";
 import { homedir } from "os";
 import { promisify } from "util";
+import inject from "@rollup/plugin-inject";
+import path from "path";
 
 const options = {
   /**
@@ -39,9 +41,7 @@ async function getOutput() {
 
   if (platform === "win32") {
     // Windows
-    const { stdout } = await promisify(exec)(
-      "powershell -command \"[Environment]::GetFolderPath('MyDocuments')\""
-    );
+    const { stdout } = await promisify(exec)("powershell -command \"[Environment]::GetFolderPath('MyDocuments')\"");
     return `${stdout.trim()}/${pluginPath}`;
   } else if (platform === "darwin") {
     // MacOS
@@ -57,7 +57,7 @@ async function getOutput() {
  * @type {import("rollup").RollupOptions}
  */
 const config = {
-  input: "./src/plugin.ts",
+  input: ["./src/plugin.ts"],
   output: {
     file: await getOutput(),
     format: "iife",
@@ -65,6 +65,9 @@ const config = {
   },
   treeshake: "smallest",
   plugins: [
+    inject({
+      Promise: [path.resolve("src/polyfills/promisePolyfill.ts"), "PromisePolyfill"],
+    }),
     resolve(),
     typescript(),
     terser({
