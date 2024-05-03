@@ -5,6 +5,7 @@ export const selectTile = (props: {
   coordsStore: WritableStore<CoordsXY | null>;
   tileSelectionStore: WritableStore<boolean>;
   isPressed: boolean;
+  callback?: (coords: CoordsXYZ) => void;
 }) => {
   if (props.isPressed) {
     toggleXYZPicker({
@@ -13,8 +14,11 @@ export const selectTile = (props: {
       onPick: (coords) => {
         props.coordsStore.set(coords);
         props.tileSelectionStore.set(false);
+        if (props.callback) props.callback(coords);
       },
-      onFinish: () => {},
+      onFinish: () => {
+        props.tileSelectionStore.set(false);
+      },
     });
   }
 };

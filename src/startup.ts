@@ -1,6 +1,5 @@
 import * as window from "./ui/window";
-
-export function startup() {
+export async function startup() {
   if (typeof ui !== "undefined") {
     window.initialize();
 

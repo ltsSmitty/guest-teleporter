@@ -12,7 +12,6 @@ function PromisePolyfill(executor) {
     value = v;
 
     if (typeof onResolve === "function") {
-      console.log("HELLO");
       onResolve(value);
       called = true;
     }
