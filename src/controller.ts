@@ -94,10 +94,14 @@ export class Teleporter {
     const handle = createTickSubscription(ticks, async () => {
       let steps = 0;
       let total = 0;
+
       const guests = map.getAllEntities("guest");
-      console.log("guests", guests.length);
       for (let i = 0; i < guests.length; i++) {
         const guest = guests[i];
+        if (!guest || !guest.isInPark) {
+          // console.log("no guest", i, guest?.id, guest?.isInPark);
+          continue;
+        }
         this.teleportGuest(guest);
         steps++;
 
@@ -108,6 +112,7 @@ export class Teleporter {
           await nextTick();
         }
       }
+      console.log(`teleported ${guests.length} guests`);
     });
     return handle;
   }
@@ -122,6 +127,7 @@ export class Teleporter {
     if (!teleportCoords) {
       return;
     }
+
     teleportGuest(guest, teleportCoords);
   }
 }
@@ -138,6 +144,7 @@ export const createTickSubscription = (tickInterval: number, callback: () => voi
   let ticks = 0;
   return context.subscribe("interval.tick", () => {
     ticks++;
+    console.log("tick", ticks, ticks % tickInterval === 0);
     if (ticks % tickInterval === 0) {
       callback();
     }

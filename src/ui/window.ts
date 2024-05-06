@@ -14,22 +14,25 @@ import {
 import { selectTile } from "../tools/selectTile";
 import { getFootpathHeights } from "../tools/getFootpathHeights";
 import { Teleporter } from "../controller";
+import { initializeStore } from "../tools/saveStore";
 
 let window: WindowTemplate;
 let isWindowOpen = false;
 
-const balloonCoordsStore: WritableStore<CoordsXY | null> = store<CoordsXY | null>(null);
 const balloonToggleStore: WritableStore<boolean> = store<boolean>(false);
 const balloonZStore: WritableStore<number | null> = store<number | null>(null);
-const waterCoordsStore: WritableStore<CoordsXY | null> = store<CoordsXY | null>(null);
 const waterToggleStore: WritableStore<boolean> = store<boolean>(false);
 const waterZStore: WritableStore<number | null> = store<number | null>(null);
-const atmCoordsStore: WritableStore<CoordsXY | null> = store<CoordsXY | null>(null);
 const atmToggleStore: WritableStore<boolean> = store<boolean>(false);
 const atmZStore: WritableStore<number | null> = store<number | null>(null);
 
 export function initialize() {
   const teleporter = new Teleporter();
+  const key = "guest-teleporter-multi";
+  const balloonCoordsStore: WritableStore<CoordsXY | null> = initializeStore<CoordsXY | null>(`${key}-balloon-coords`);
+  const waterCoordsStore: WritableStore<CoordsXY | null> = initializeStore<CoordsXY | null>(`${key}-water-coords`);
+  const atmCoordsStore: WritableStore<CoordsXY | null> = initializeStore<CoordsXY | null>(`${key}-atm-coords`);
+
   window = flexWindow({
     title: "Guest Teleporter",
     width: 300,
@@ -132,7 +135,7 @@ export function initialize() {
         }),
       }),
       horizontal([
-        label({ text: "Tick loops between computation" }),
+        label({ text: "Ticks between computation" }),
         spinner({
           width: 50,
           minimum: 1,
@@ -143,7 +146,7 @@ export function initialize() {
         }),
       ]),
       horizontal([
-        label({ text: "Hundreds of events per tick" }),
+        label({ text: "Num guests process/tick (x100)" }),
         spinner({
           width: 50,
           minimum: 1,
