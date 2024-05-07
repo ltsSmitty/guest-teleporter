@@ -86,6 +86,7 @@ export class Teleporter {
       if (this.subscription?.dispose) {
         console.log("disposing of tick subscription");
         this.subscription.dispose();
+        this.subscription = undefined;
       }
     }
   }
@@ -100,7 +101,6 @@ export class Teleporter {
       for (let i = 0; i < guests.length; i++) {
         const guest = guests[i];
         if (!guest || !guest.isInPark) {
-          // console.log("no guest", i, guest?.id, guest?.isInPark);
           continue;
         }
         this.teleportGuest(guest);
