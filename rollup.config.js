@@ -11,7 +11,7 @@ const options = {
   /**
    * Change the file name of the output file here.
    */
-  filename: "guest-teleporter.js",
+  filename: "guest-teleporter-multi.js",
 
   /**
    * Determines in what build mode the plugin should be build. The default here takes

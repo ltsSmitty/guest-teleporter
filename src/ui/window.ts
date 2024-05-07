@@ -34,7 +34,7 @@ export function initialize() {
   const atmCoordsStore: WritableStore<CoordsXY | null> = initializeStore<CoordsXY | null>(`${key}-atm-coords`);
 
   window = flexWindow({
-    title: "Guest Teleporter",
+    title: "Guest Teleporter Multi",
     width: 300,
     height: 250,
     colours: [Colour.LightBlue, Colour.LightBlue],

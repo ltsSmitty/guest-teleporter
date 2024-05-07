@@ -1,7 +1,7 @@
 import { startup } from "./startup";
 
 registerPlugin({
-  name: "Guest Teleporter",
+  name: "Guest Teleporter - multi",
   version: "1.1",
   authors: ["ltsSmitty"],
   type: "remote",
