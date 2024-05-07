@@ -91,11 +91,12 @@ export class Teleporter {
   }
 
   createTeleportSubscription(ticks: number) {
+    // get the guests when the plugin is activated, and not again
+    const guests = map.getAllEntities("guest");
     const handle = createTickSubscription(ticks, async () => {
       let steps = 0;
       let total = 0;
 
-      const guests = map.getAllEntities("guest");
       for (let i = 0; i < guests.length; i++) {
         const guest = guests[i];
         if (!guest || !guest.isInPark) {
